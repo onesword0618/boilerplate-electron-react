@@ -1,3 +1,28 @@
+# docker-compose
 # https://docs.docker.com/compose/compose-file/#compose-and-docker-compatibility-matrix
-# Docker Engine のversionを設定する
 version: '3.8'
+# https://docs.docker.com/compose/compose-file/#service-configuration-reference
+services:
+  db:
+    # https://docs.docker.com/compose/compose-file/#image
+    image: mysql:8.0
+    # https://docs.docker.com/compose/compose-file/#volumes
+    volumes:
+      # リソース元:コンテナの定義先
+      - db-store:/var/lib/mysql
+      - ./logs:/var/log/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    # https://docs.docker.com/compose/compose-file/#environment
+    environment:
+      # https://hub.docker.com/_/mysql
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - TZ=${TZ}
+    # https://docs.docker.com/compose/compose-file/#ports
+    ports:
+      - ${DB_PORT}:3306
+# https://docs.docker.com/compose/compose-file/#volume-configuration-reference
+volumes:
+  db-store:
