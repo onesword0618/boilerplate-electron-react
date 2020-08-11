@@ -1,4 +1,5 @@
 # docker-compose
+#
 # https://docs.docker.com/compose/compose-file/#compose-and-docker-compatibility-matrix
 version: '3.8'
 # https://docs.docker.com/compose/compose-file/#service-configuration-reference
@@ -8,13 +9,33 @@ services:
     image: mysql:8.0
     # https://docs.docker.com/compose/compose-file/#volumes
     volumes:
-      # リソース元:コンテナの定義先
-      - db-store:/var/lib/mysql
-      - ./logs:/var/log/mysql
+      # source:container
+      #
+      # define mysql-datadir
+      # https://dev.mysql.com/doc/refman/8.0/en/mysql-cluster-ndbd-definition.html#ndbparam-ndbd-datadir
+      # https://dev.mysql.com/doc/mysql-linuxunix-excerpt/8.0/en/data-directory-initialization.html
+      # define use Dockerfile
+      # https://github.com/docker-library/mysql/blob/master/8.0/Dockerfile#L73
+      - db-datadir:/var/lib/mysql/
+      # define option-files
+      # https://dev.mysql.com/doc/refman/8.0/en/option-files.html
+      # > Table 4.2 Option Files Read on Unix and Unix-Like Systems
+      # > /etc/mysql/my.cnf
+      # define use Dockerfile
+      # https://github.com/docker-library/mysql/blob/b0f81a33748561ae4e35a09895b2ad112ff89ba6/8.0/config/my.cnf#L29
+      # additional option-files
+      # > /etc/conf.d/mysql.cnf
+      # https://hub.docker.com/_/mysql
+      # Using a custom MySQL configuration file
       - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      # define log-dir
+      # https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/using-systemd.html
+      # > Overview of systemd
+      - ./logs:/var/log/mysql/
     # https://docs.docker.com/compose/compose-file/#environment
     environment:
       # https://hub.docker.com/_/mysql
+      # > Environment Variables
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_USER=${DB_USER}
       - MYSQL_PASSWORD=${DB_PASSWORD}
@@ -23,6 +44,14 @@ services:
     # https://docs.docker.com/compose/compose-file/#ports
     ports:
       - ${DB_PORT}:3306
+    # https://docs.docker.com/compose/compose-file/#security_opt
+    security_opt:
+      # https://docs.docker.com/engine/security/seccomp/
+      # https://docs.docker.com/engine/security/seccomp/#run-without-the-default-seccomp-profile
+      - seccomp:unconfined
+    # https://docs.docker.com/compose/compose-file/#command
+    command: 
+      bash -c "chown -R mysql:mysql /var/log/mysql && exec /entrypoint.sh mysqld"
 # https://docs.docker.com/compose/compose-file/#volume-configuration-reference
 volumes:
-  db-store:
+  db-datadir:
