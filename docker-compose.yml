@@ -28,10 +28,13 @@ services:
       # https://hub.docker.com/_/mysql
       # Using a custom MySQL configuration file
       - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-      # define log-dir
+      # define log-files
       # https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/using-systemd.html
       # > Overview of systemd
       - ./logs:/var/log/mysql/
+      # define set-up database
+      # https://github.com/docker-library/mysql/blob/master/8.0/docker-entrypoint.sh#L365
+      - ./mysql/setUp:/docker-entrypoint-initdb.d
     # https://docs.docker.com/compose/compose-file/#environment
     environment:
       # https://hub.docker.com/_/mysql
