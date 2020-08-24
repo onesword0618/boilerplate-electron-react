@@ -1,8 +1,15 @@
 # Dont't commit File and Directory
-
+#
 # Logs
 logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Runtime data
 pids
@@ -14,6 +21,10 @@ lib-cov
 
 # Coverage
 coverage
+*.lcov
+
+# nyc
+.nyc_output
 
 # node-waf
 .lock-wscript
@@ -23,8 +34,33 @@ build/Release
 .eslintcache
 
 # Dependency directory
-node_modules
+node_modules/
+jspm_packages/
+
+# TypeScript
+typings/
+*.tsbuildinfo
+
+.npm
+.eslintcache
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
 
 # OSX
 .DS_Store
+.AppleDouble
+.LSOverride
 
+# Icon
+Icon
+
+# Thumbnails
+._*
+
+# env
+.env
