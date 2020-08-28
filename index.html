@@ -13,6 +13,16 @@
     Chromium <span id="chrome-version"></span>,
     and Electron <span id="electron-version"></span>.
 
+    <button elc-js="ExecuteQUeryBtn">SELECT * FROM current_product</button>
+    <table border="" elc-js="SelectResultTbl">
+        <thead>
+            <tr>
+                <th>message</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
   </body>
