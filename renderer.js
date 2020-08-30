@@ -1,5 +1,3 @@
-//const { electron } = require("electron");
-
 (function(){
     let clickEventName = 'click';
     let clickButtonEventHandler = function(){
