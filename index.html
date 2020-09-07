@@ -1,27 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="onesword0618">
-    <meta name="description" content="boilerplate">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>boierplate</title>
-  </head>
-  <body>
-    <h1>SQL Mode</h1>
-    <button elc-js="ExecuteQUeryBtn">execute</button>
-    <table border="" elc-js="SelectResultTbl">
-        <thead>
-            <tr>
-                <th>message</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="onesword0618">
+  <meta name="description" content="boilerplate">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <title>boierplate</title>
+</head>
+
+<body>
+  <h1>SQL Mode</h1>
+  <textarea id="text" rows="8" cols="50"></textarea>
+  <table border="" elc-js="ExecuteResultTable">
+    <thead>
+      <tr>
+        <th>message</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <input id="notice" type="button" value="notice">
+  <input id="noNotice" type="button" value="noNotice">
+  <input id="noNoticeAlert" type="button" value="noNoticeAlert">
+  <input id="executeQUeryButton" type="button" value="execute">
+  <!-- You can also require other files to run in this process -->
+  <script src="./renderer.js"></script>
+</body>
+
 </html>

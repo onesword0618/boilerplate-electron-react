@@ -2,14 +2,13 @@
   "name": "boilerplate-electron-react",
   "version": "1.0.0",
   "description": "boilerplate",
-  "main": "main.js",
+  "main": "./src/main.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
     "test": "",
     "start": "electron ."
-
   },
   "repository": {
     "type": "git",
@@ -31,6 +30,7 @@
     "@babel/preset-typescript": "^7.10.4",
     "babel-loader": "^8.1.0",
     "electron": "^9.2.0",
+    "electron-packager": "^15.1.0",
     "eslint": "^7.6.0",
     "jest": "^26.3.0",
     "jsdoc": "^3.6.5",
